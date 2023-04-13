@@ -45,7 +45,7 @@ class kohonen:
                 
 
     def fit(self, img):
-        self.kohonen_map = np.random.rand(self.length, self.breadth, img.shape[2])
+        self.kohonen_map = np.random.rand(self.length, self.breadth, img.shape[2])*255
         for i in range(self.max_iter):
             self.curr_iter = i
             for u in tqdm(range(img.shape[0])):
