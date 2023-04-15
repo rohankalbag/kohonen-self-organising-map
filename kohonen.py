@@ -54,5 +54,12 @@ class kohonen:
                     bmu = self.find_best_matching_unit(x)
                     self.update_weights(bmu, x)
             
-    def generate_coded_image(self):
-        return self.kohonen_map
+    def generate_coded_image(self, img):
+        coded_img =  np.zeros(shape=(img.shape[0], img.shape[1], 2))
+        for i in range(img.shape[0]):
+            for j in range(img.shape[1]):
+                rgb_val = img[i, j]
+                closest = self.find_best_matching_unit(rgb_val)
+                coded_coordinates = np.array(closest)
+                coded_img[i, j] = coded_coordinates
+        return coded_img
