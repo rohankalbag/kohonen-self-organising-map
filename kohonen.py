@@ -12,6 +12,7 @@ from tkinter import messagebox
 import scipy
 from sys import exit
 
+
 def blockPrint():
     sys.stdout = open(os.devnull, 'w')
 
@@ -168,7 +169,13 @@ def retrieve_inputs():
         plt.savefig(f'{output_dir}/kohonen.png')
         
     coded_image = generate_coded_image(img_arr, kohonen_map)
-    print(coded_image.shape)
+
+    with open(f'{output_dir}/coded_image.txt', 'w') as outfile:
+        outfile.write('# coded image shape: {0}\n'.format(coded_image.shape))
+        for x in range(coded_image.shape[0]):
+            for y in range(coded_image.shape[1]):
+                outfile.write(f"index of bmu for pixel [{x}, {y}]: [{int(coded_image[x][y][0])}, {int(coded_image[x][y][1])}]\n")
+ 
     np.save(f'{output_dir}/coded_image', coded_image)
 
     if(kohonen_map.shape[2] == 3):
