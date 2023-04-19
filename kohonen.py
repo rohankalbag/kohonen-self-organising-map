@@ -10,7 +10,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from tkinter import messagebox
 import scipy
-import time
+from sys import exit
 
 def blockPrint():
     sys.stdout = open(os.devnull, 'w')

@@ -1,3 +1,4 @@
+altgraph==0.17.3
 asttokens==2.2.1
 backcall==0.2.0
 comm==0.1.3
@@ -33,6 +34,8 @@ psutil==5.9.4
 ptyprocess==0.7.0
 pure-eval==0.2.2
 Pygments==2.15.0
+pyinstaller==5.10.1
+pyinstaller-hooks-contrib==2023.2
 pyparsing==3.0.9
 python-dateutil==2.8.2
 pyzmq==25.0.2
