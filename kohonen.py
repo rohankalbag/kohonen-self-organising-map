@@ -195,6 +195,10 @@ def retrieve_inputs():
 
 if __name__ == "__main__":
 
+    print("Welcome to Kohonen Map and Coded Image Generator")
+    print("Authors: Rohan Rajesh Kalbag, Durgaprasad Bhat, Siddharth Anand")
+    print("Performed as Course Project: GNR 602 : Advanced Methods for Satellite Image Processing")
+    print("Please wait for a few seconds for the GUI to initialize")
     root = tk.Tk()
     root.geometry("500x500")
     root.withdraw()
