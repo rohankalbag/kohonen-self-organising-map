@@ -1,17 +1,16 @@
-import numpy as np
-import numba
-from numba_progress import ProgressBar
-import sys
-import os
 import tkinter as tk
 from tkinter import filedialog
-import numpy as np
-from PIL import Image
-import matplotlib.pyplot as plt
+import threading
 from tkinter import messagebox
+import sys
+import matplotlib.pyplot as plt
+from PIL import Image
+import numpy as np
 import scipy
-from sys import exit
-
+import os
+import numba
+from numba_progress import ProgressBar
+import time
 
 def blockPrint():
     sys.stdout = open(os.devnull, 'w')
@@ -111,139 +110,162 @@ def generate_kohonen(img, length, breadth, lr, maxiter, spread):
 
     return kohonen_map
 
+class UI:
+	def __init__(self):
+		self.root = tk.Tk()
+		self.root.option_add( "*font", "courier 10 bold" )
+		self.image_path = ''
+		self.output_dir = ''
+		self.root.geometry("600x750")
+		self.root.title("Kohonen Map and Code Book Generator")
+		self.error = False
+		self.ready = True
 
-def retrieve_inputs():
-    global image_path, output_dir, root
+		self.length = 0
+		self.neighbourhoodfunctionspread = 0
+		self.breadth = 0
+		self.learning_rate = 0
+		self.maxiter = 0
+		self.img_arr = None
 
-    try:
+		
+		self.gui = [
+			tk.Label(self.root, text="GNR 602 Course Project\n Kohonen Map and Code Book Generator \n Rohan Rajesh Kalbag, Durgaprasad Bhat, Siddharth Anand"),
+			tk.Button(self.root, text="Select Input File", command=self.task1),
+			tk.Label(self.root, text="", wraplength=300),
+			tk.Button(self.root, text="Select Output Directory", command=self.task2),
+			tk.Label(self.root, text="", wraplength=300),
+		]
 
-        length = int(entry1.get())
-        breadth = int(entry2.get())
-        learning_rate = float(entry3.get())
-        maxiter = int(entry4.get())
-        neighbourhoodfunctionspread = float(entry5.get())
-    
-    except:
-        x = messagebox.showerror("Warning", "Incompatible Parameters Inputted, Check Readme")
-        exit(0)
-    
-    if(length < 0 or breadth < 0 or learning_rate < 0 or maxiter < 0 or neighbourhoodfunctionspread < 0):
-        x = messagebox.showerror("Warning", "Incompatible Parameters Inputted, Check Readme")
-        exit(0)
+		self.inputs = [
+			tk.Label(self.root, text="Length of Kohonen Map (Nodes)"),
+			tk.Entry(self.root),
+			tk.Label(self.root, text="Breath of Kohonen Map (Nodes)"),
+			tk.Entry(self.root),
+			tk.Label(self.root, text="Initial Learning Rate for Training"),
+			tk.Entry(self.root),
+			tk.Label(self.root, text="Maximum Number of Iterations"),
+			tk.Entry(self.root),
+			tk.Label(self.root, text="Neighbourhood Function Spread Factor"),
+			tk.Entry(self.root),
+			tk.Button(self.root, text="Validate", command=self.task3),
+			tk.Label(self.root, text=""),
+		]
 
-    print(image_path)
-    print(output_dir)
-    
-    img_arr = None
+		self.generate = tk.Button(self.root, text="Generate", command=self.computation)
 
-    if(image_path[-3:] == 'jpg' or image_path[-3:] == 'png'):
-        
-        plt.figure()
-        img = Image.open(image_path).convert('RGB')
-        img = img.resize((150, 150))
-        img.save(f'{output_dir}/150x150.jpg')
-        img_arr = np.asarray(img)
+	def task1(self):
+		threading.Thread(target=self.get_image_file).start()
 
-    elif(image_path[-3:] == 'npy'):
-        
-        img_arr = np.load(image_path)
+	def get_image_file(self):
+		image_path = ''
+		while len(image_path) == 0:
+			image_path = filedialog.askopenfilename(title="Select Image Filename")
+		self.gui[2]["text"] = f"Selected Image: {image_path}"
+		self.image_path = image_path
+	
+	def task2(self):
+		threading.Thread(target=self.get_out_dir).start()
 
-    elif(image_path[-3:] == 'mat'):
+	def get_out_dir(self):
+		output_dir = ''
+		while len(output_dir) == 0:
+			output_dir = filedialog.askdirectory(title="Directory To Save Outputs")
+		self.gui[4]["text"] = f"Selected Output Directory: {output_dir}"
+		self.output_dir = output_dir
+	
+	def task3(self):
+		threading.Thread(target=self.validate).start()
+	
+	def validate(self):
+		try:
+			self.length = int(self.inputs[1].get())
+			self.breadth = int(self.inputs[3].get())
+			self.learning_rate = float(self.inputs[5].get())
+			self.maxiter = int(self.inputs[7].get())
+			self.neighbourhoodfunctionspread = float(self.inputs[9].get())
+		
+		except:
+			x = messagebox.showerror("Warning", "Incompatible Parameters Inputted, Check Readme")
+			self.error = True
+		
+		if(self.length < 0 or self.breadth < 0 or self.learning_rate < 0 or self.maxiter < 0 or self.neighbourhoodfunctionspread < 0):
+			x = messagebox.showerror("Warning", "Incompatible Parameters Inputted, Check Readme")
+			self.error = True
 
-        mat = scipy.io.loadmat(image_path)
-        keys = list(mat.keys())
-        image = mat[keys[3]]
-        img_arr = np.array(image, dtype=np.int32)
+		print(self.image_path)
+		print(self.output_dir)
+		
+		if(self.image_path[-3:] == 'jpg' or self.image_path[-3:] == 'png'):
+			img = Image.open(self.image_path).convert('RGB')
+			img = img.resize((150, 150))
+			img.save(f'{self.output_dir}/150x150.jpg')
+			self.img_arr = np.asarray(img)
 
-    else:
+		elif(self.image_path[-3:] == 'npy'):
+			self.img_arr = np.load(self.image_path)
 
-        x = messagebox.showerror("Warning", "Wrong Input File Type")
-        exit(0)
-        
+		elif(self.image_path[-3:] == 'mat'):
+			mat = scipy.io.loadmat(self.image_path)
+			keys = list(mat.keys())
+			image = mat[keys[3]]
+			self.img_arr = np.array(image, dtype=np.int32)
 
-    kohonen_map = generate_kohonen(img_arr, length, breadth, learning_rate, maxiter, neighbourhoodfunctionspread)
-    
-    if(kohonen_map.shape[2] == 3):
-        
-        plt.imshow(kohonen_map/255, interpolation='nearest')
-        plt.savefig(f'{output_dir}/kohonen.png')
-        
-    coded_image = generate_coded_image(img_arr, kohonen_map)
+		else:
+			x = messagebox.showerror("Warning", "Wrong Input File Type")
+			self.error = True
+		
+		if self.error:
+			self.inputs[11]["text"] = "Fix the errors and try again"
+		else:
+			self.generate.pack()
 
-    with open(f'{output_dir}/coded_image.txt', 'w') as outfile:
-        outfile.write('# coded image shape: {0}\n'.format(coded_image.shape))
-        for x in range(coded_image.shape[0]):
-            for y in range(coded_image.shape[1]):
-                outfile.write(f"index of bmu for pixel [{x}, {y}]: [{int(coded_image[x][y][0])}, {int(coded_image[x][y][1])}]\n")
- 
-    np.save(f'{output_dir}/coded_image', coded_image)
+	
+	def computation(self):
 
-    if(kohonen_map.shape[2] == 3):
-        
-        plt.figure()
-        plt.axis('off')
-        img_restored = generate_image_from_coded(coded_image, kohonen_map)
-        plt.imshow(img_restored/255, interpolation='nearest')
-        plt.savefig(f'{output_dir}/restored.png')
+		for u in self.inputs:
+			u.pack_forget()
 
-    print("Saved Files\n")
-    
-    print("Terminating Executable\n")
-    
-    exit(0)
+		self.inputs[-1]["text"] = "Processing, Please Wait\n May take a few minutes \n For Hyperspectral Images it may take 15-20 min \n Do not close this window \n Check progress on terminal behind"
+		self.inputs[-1].pack()
+		self.generate.pack_forget()
+		self.root.update()
 
+		kohonen_map = generate_kohonen(self.img_arr, self.length, self.breadth, self.learning_rate, self.maxiter, self.neighbourhoodfunctionspread)
+
+		if(kohonen_map.shape[2] == 3):
+			plt.imshow(kohonen_map/255, interpolation='nearest')
+			plt.savefig(f'{self.output_dir}/kohonen.png')
+			
+		coded_image = generate_coded_image(self.img_arr, kohonen_map)
+
+		with open(f'{self.output_dir}/coded_image.txt', 'w') as outfile:
+			outfile.write('# coded image shape: {0}\n'.format(coded_image.shape))
+			for x in range(coded_image.shape[0]):
+				for y in range(coded_image.shape[1]):
+					outfile.write(f"index of bmu for pixel [{x}, {y}]: [{int(coded_image[x][y][0])}, {int(coded_image[x][y][1])}]\n")
+	
+		np.save(f'{self.output_dir}/coded_image', coded_image)
+
+		if(kohonen_map.shape[2] == 3):
+			plt.figure()
+			plt.axis('off')
+			img_restored = generate_image_from_coded(coded_image, kohonen_map)
+			plt.imshow(img_restored/255, interpolation='nearest')
+			plt.savefig(f'{self.output_dir}/restored.png')
+		
+		self.inputs[-1]["text"] = "Thank You"
+		self.root.update()
+		time.sleep(2)
+		sys.exit(0)
+	
+ui = UI()
 
 if __name__ == "__main__":
-
-    print("Welcome to Kohonen Map and Coded Image Generator")
-    print("Authors: Rohan Rajesh Kalbag, Durgaprasad Bhat, Siddharth Anand")
-    print("Performed as Course Project: GNR 602 : Advanced Methods for Satellite Image Processing")
-    print("Please wait for a few seconds for the GUI to initialize")
-    root = tk.Tk()
-    root.geometry("500x500")
-    root.withdraw()
-
-    image_path = ''
-    output_dir = ''
-
-    while len(image_path) == 0:
-        image_path = filedialog.askopenfilename(title="Select Image Filename")
-
-    while len(output_dir) == 0:
-        output_dir = filedialog.askdirectory(title="Directory To Save Outputs")
-
-    root = tk.Tk()
-    root.geometry("500x500")
-    root.title("Input Parameters of Kohonen Map")
-
-    label1 = tk.Label(root, text="Length of Kohonen Map (Nodes)")
-    label1.pack()
-    entry1 = tk.Entry(root)
-    entry1.pack()
-
-    label2 = tk.Label(root, text="Breath of Kohonen Map (Nodes)")
-    label2.pack()
-    entry2 = tk.Entry(root)
-    entry2.pack()
-
-    label3 = tk.Label(root, text="Initial Learning Rate for Training")
-    label3.pack()
-    entry3 = tk.Entry(root)
-    entry3.pack()
-
-    label4 = tk.Label(root, text="Maximum Number of Iterations")
-    label4.pack()
-    entry4 = tk.Entry(root)
-    entry4.pack()
-
-    label5 = tk.Label(root, text="Neighbourhood Function Spread Factor")
-    label5.pack()
-    entry5 = tk.Entry(root)
-    entry5.pack()
-
-    # Create a button to retrieve inputs
-    button = tk.Button(root, text="Submit", command=retrieve_inputs)
-    button.pack()
-
-    # Start the Tkinter event loop
-    root.mainloop()
+	if ui.error:
+		sys.exit(0)
+	for k in ui.gui:
+		k.pack(pady=10, padx=10)
+	for u in ui.inputs:
+		u.pack(pady=5, padx=10)
+	ui.root.mainloop()
