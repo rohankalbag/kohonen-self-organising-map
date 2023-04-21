@@ -1,5 +1,27 @@
 #                                   Kohonen Self Organising Map
-##                                    GNR-602 Course Project
+##                  GNR-602 : Advanced Methods in Satellite Image Processing
+##                                       Course Project
+
+### *Abstract: In this project we implement a Numba-JIT Accelerated Pythonic Implementation of the Kohonen Self Organising Map with user-specified grid
+matrix size, and a multispectral image as input and we generate a coded image using the trained SOM as a code book. We also restore the image from its codebook and compare it with original image*
+
+### Collaborators
+
+- Rohan Rajesh Kalbag : 20D170033
+- Durgaprasad Bhat: 200070017
+- Siddharth Anand: 20D070076
+  
+### To generate executable in Windows
+
+```bash
+./generate_executable.ps1
+```
+
+### To generate executable in Ubuntu
+```bash
+chmod +x generate_executable.sh
+./generate_executable.sh
+```
 
 ### Instructions for running `.exe`
 
@@ -32,3 +54,62 @@ Please wait till the training completes and the results are generated. The time 
 3. `coded_image.txt` : A human readable version of the coded image with the best matching Kohonen cell for each pixel.
 4. `kohonen.png` : The trained Kohonen map visualized as an image
 5. `restored.png` : The final result. The original image reconstructed using the best matching Kohonen map cells. 
+
+## Results
+
+- Find a detailed analysis of the code, experiments and inferences in the [Presentation](https://github.com/rohankalbag/kohonen-self-organising-map/blob/main/presentation.pdf)
+
+## Some Cool Inferences
+
+#### Tom and Jerry
+
+- Input Image 
+![150x150](https://user-images.githubusercontent.com/46604893/233674541-5be40ad1-a751-459f-8cfa-c7f4561e121f.jpg)
+
+- Parameters
+
+```
+{
+  l = 12
+  b = 12
+  lr = 0.5
+  niter = 20
+  nbf = 0.03
+}
+```
+
+- Kohonen Map
+
+![kohonen](https://user-images.githubusercontent.com/46604893/233674986-dc459449-40ae-4a04-95c1-7cb4dbb7d438.png)
+
+- Restored Image
+
+![restored](https://user-images.githubusercontent.com/46604893/233675058-a8d8ba14-d3bf-4d19-bd50-2cfeea58b073.png)
+
+## RGB (3 channel) Satellite Image of Mumbai
+
+- Input Image 
+
+![mumbai_200x200](https://user-images.githubusercontent.com/46604893/233675519-67c630ed-fb59-4526-b77d-0c91374bec1c.jpg)
+
+- Parameters
+
+```
+{
+  l = 20
+  b = 35
+  lr = 0.25
+  niter = 100
+  nbf = 0.02083
+}
+```
+
+- Kohonen Map
+
+![mumbai_kohonen_2 5](https://user-images.githubusercontent.com/46604893/233676619-895de481-ae92-41e8-8228-e67ff27a46cb.png)
+
+- Restored Image 
+
+![mumbai_restored_2 5](https://user-images.githubusercontent.com/46604893/233676677-4d2f8a9d-2f6c-4b35-8a6e-38bfd65fa237.png)
+
+
