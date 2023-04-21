@@ -1,9 +1,9 @@
 #                                   Kohonen Self Organising Map
 ##                                    GNR-602 Course Project
 
-### Instructions for running .exe
+### Instructions for running `.exe`
 
-**Image formats supported**: .png, .jpg, .mat (single image in a single array in x_pixels * y_pixels * n_channels for .mat)
+**Image formats supported**: `.png`, `.jpg`, `.mat` (single image in a single array in `x_pixels` * `y_pixels` * `n_channels` for `.mat`)
 
 
 **Selecting Input file**: Press the ‘Select Input File’ button, use the file navigator to navigate to the required file. Select the file 
@@ -27,8 +27,8 @@ Please wait till the training completes and the results are generated. The time 
 
 
 **Outputs**: 
-1. 150x150.png : A downsized version of the input image (150 x 150 pixels)
-2. coded_image.npy : A numpy file containing the coded image. Users can import this into their own python code using numpy.load() 
-3. coded_image.txt : A human readable version of the coded image with the best matching Kohonen cell for each pixel.
-4. kohonen.png : The trained Kohonen map visualized as an image
-5. restored.png : The final result. The original image reconstructed using the best matching Kohonen map cells. 
+1. `150x150.png` : A downsized version of the input image ($150$ x $150$ pixels)
+2. `coded_image.npy` : A numpy file containing the coded image. Users can import this into their own python code using `numpy.load()` 
+3. `coded_image.txt` : A human readable version of the coded image with the best matching Kohonen cell for each pixel.
+4. `kohonen.png` : The trained Kohonen map visualized as an image
+5. `restored.png` : The final result. The original image reconstructed using the best matching Kohonen map cells. 
