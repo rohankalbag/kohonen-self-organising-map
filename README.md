@@ -2,8 +2,8 @@
 ##                  GNR-602 : Advanced Methods in Satellite Image Processing
 ##                                       Course Project
 
-### *Abstract: In this project we implement a Numba-JIT Accelerated Pythonic Implementation of the Kohonen Self Organising Map with user-specified grid
-matrix size, and a multispectral image as input and we generate a coded image using the trained SOM as a code book. We also restore the image from its codebook and compare it with original image*
+
+**Abstract: In this project we implement a Numba-JIT Accelerated Pythonic Implementation of the Kohonen Self Organising Map with user-specified grid matrix size, and a multispectral image as input and we generate a coded image using the trained SOM as a code book. We also restore the image from its codebook and compare it with original image**
 
 ### Collaborators
 
@@ -63,8 +63,10 @@ Please wait till the training completes and the results are generated. The time 
 
 #### Tom and Jerry
 
-- Input Image 
-![150x150](https://user-images.githubusercontent.com/46604893/233674541-5be40ad1-a751-459f-8cfa-c7f4561e121f.jpg)
+- Input Image (was resized to $150$ x $150$)
+
+![tj](https://user-images.githubusercontent.com/46604893/233677504-d163639f-7a09-4696-a20f-702e5210cb70.jpg)
+
 
 - Parameters
 
@@ -88,9 +90,9 @@ Please wait till the training completes and the results are generated. The time 
 
 ## RGB (3 channel) Satellite Image of Mumbai
 
-- Input Image 
+- Input Image (was resized to $200$ x $200$)
 
-![mumbai_200x200](https://user-images.githubusercontent.com/46604893/233675519-67c630ed-fb59-4526-b77d-0c91374bec1c.jpg)
+![mumbai](https://user-images.githubusercontent.com/46604893/233677679-b1872cde-d345-4878-98d6-e5494c2f3617.jpg)
 
 - Parameters
 
