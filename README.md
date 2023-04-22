@@ -5,6 +5,8 @@
 
 *Abstract: In this project we implement a Numba-JIT Accelerated Pythonic Implementation of the Kohonen Self Organising Map with user-specified grid matrix size, and a multispectral image as input and we generate a coded image using the trained SOM as a code book. We also restore the image from its codebook and compare it with original image*
 
+[Project Files](https://iitbacin-my.sharepoint.com/:u:/g/personal/20d170033_iitb_ac_in/EU_LjvJoHBhOoA7GgfJpv-0BlsK5mMnNCdfzmVr2Sm6PWw?e=bOu5I7)
+
 ### Collaborators
 
 - Rohan Rajesh Kalbag 
