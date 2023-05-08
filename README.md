@@ -31,10 +31,10 @@ chmod +x generate_executable.sh
 **Image formats supported**: `.png`, `.jpg`, `.mat` (single image in a single array in `x_pixels` * `y_pixels` * `n_channels` for `.mat`)
 
 
-**Selecting Input file**: Press the ‘Select Input File’ button, use the file navigator to navigate to the required file. Select the file 
+**Selecting Input file**: Press the `Select Input File` button, use the file navigator to navigate to the required file. Select the file 
 
 
-**Selecting destination folder**: Press the ‘Select Output Directory’ button, use the file navigator to navigate to the folder where the outputs are needed to be stored. Select the folder
+**Selecting destination folder**: Press the `Select Output Directory` button, use the file navigator to navigate to the folder where the outputs are needed to be stored. Select the folder
 
 
 **Input parameters**:
@@ -45,7 +45,7 @@ chmod +x generate_executable.sh
 - Neighborhood Function Spread Factor : positive float (Usually less than 1) Larger factor will increase the number of neighbors affected and the degree of effect. Controls the spread of the neighborhood function
 
 
-Press the `Validate` button to check if the given parameters are compatible. If the parameters are compatible, the ‘Generate’ button will appear. Press ‘Generate’ to start running the algorithm
+Press the `Validate` button to check if the given parameters are compatible. If the parameters are compatible, the `Generate` button will appear. Press `Generate` to start running the algorithm
 
 
 Please wait till the training completes and the results are generated. The time taken depends on the image type and the input parameters. Do not close the window, it will automatically close once the results are generated. For checking the progress of the training, please see the console (terminal) that will popup behind the GUI.
