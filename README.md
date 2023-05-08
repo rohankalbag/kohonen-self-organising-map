@@ -111,7 +111,7 @@ Please wait till the training completes and the results are generated. The time 
 
 - Kohonen Map
 
-![mumbai_kohonen_2 5](https://user-images.githubusercontent.com/46604893/233676619-895de481-ae92-41e8-8228-e67ff27a46cb.png | width=150px)
+<img src="https://user-images.githubusercontent.com/46604893/233676619-895de481-ae92-41e8-8228-e67ff27a46cb.png" width="150">
 
 - Restored Image 
 
