@@ -68,7 +68,7 @@ Please wait till the training completes and the results are generated. The time 
 
 - Input Image (was resized to $150$ x $150$)
 
-![tj](https://user-images.githubusercontent.com/46604893/233677504-d163639f-7a09-4696-a20f-702e5210cb70.jpg | width=150)
+![tj](https://user-images.githubusercontent.com/46604893/233677504-d163639f-7a09-4696-a20f-702e5210cb70.jpg | width=150px)
 
 
 - Parameters
@@ -85,17 +85,17 @@ Please wait till the training completes and the results are generated. The time 
 
 - Kohonen Map
 
-![kohonen](https://user-images.githubusercontent.com/46604893/233674986-dc459449-40ae-4a04-95c1-7cb4dbb7d438.png | width=150)
+![kohonen](https://user-images.githubusercontent.com/46604893/233674986-dc459449-40ae-4a04-95c1-7cb4dbb7d438.png | width=150px)
 
 - Restored Image
 
-![restored](https://user-images.githubusercontent.com/46604893/233675058-a8d8ba14-d3bf-4d19-bd50-2cfeea58b073.png | width=150)
+![restored](https://user-images.githubusercontent.com/46604893/233675058-a8d8ba14-d3bf-4d19-bd50-2cfeea58b073.png | width=150px)
 
 ## RGB (3 channel) Satellite Image of Mumbai
 
 - Input Image (was resized to $200$ x $200$)
 
-![mumbai](https://user-images.githubusercontent.com/46604893/233677679-b1872cde-d345-4878-98d6-e5494c2f3617.jpg | width=150)
+![mumbai](https://user-images.githubusercontent.com/46604893/233677679-b1872cde-d345-4878-98d6-e5494c2f3617.jpg | width=150px)
 
 - Parameters
 
@@ -111,10 +111,10 @@ Please wait till the training completes and the results are generated. The time 
 
 - Kohonen Map
 
-![mumbai_kohonen_2 5](https://user-images.githubusercontent.com/46604893/233676619-895de481-ae92-41e8-8228-e67ff27a46cb.png | width=150)
+![mumbai_kohonen_2 5](https://user-images.githubusercontent.com/46604893/233676619-895de481-ae92-41e8-8228-e67ff27a46cb.png | width=150px)
 
 - Restored Image 
 
-![mumbai_restored_2 5](https://user-images.githubusercontent.com/46604893/233676677-4d2f8a9d-2f6c-4b35-8a6e-38bfd65fa237.png | width=150)
+![mumbai_restored_2 5](https://user-images.githubusercontent.com/46604893/233676677-4d2f8a9d-2f6c-4b35-8a6e-38bfd65fa237.png | width=150px)
 
 
